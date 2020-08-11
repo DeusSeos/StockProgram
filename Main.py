@@ -13,11 +13,13 @@ import Utils
     Grapher
 """
 
+
 def display_menu():
-    """Display menu for the program"""
+    """Diqsplay menu for the program"""
     choices = ("1. Add stock", "2. Remove stock", "3. Get open price", "4. Get close price")
     for item in choices:
         print(item)
+
 
 if __name__ == '__main__':
     print("Welcome to Dominic's Stock Program")
