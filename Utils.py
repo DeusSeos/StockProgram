@@ -1,5 +1,6 @@
 import os
 import re
+from screeninfo import get_monitors
 
 
 def file_exists(filename) -> bool:
@@ -20,3 +21,14 @@ def data_convert(stock) -> dict:
         data["Time"].append(k)
         data["Price"].append(v)
     return data  # this will return a format that can be graphed easily using matlib
+
+
+def getResolution() -> str:
+    width = 100000
+    height = 100000
+    for m in get_monitors():
+        if width > int(m.width):
+            width = int(m.width)
+        if height > int(m.height):
+            height = int(m.height)
+    return f"{str(width)}x{str(height)}"

@@ -4,18 +4,18 @@ import Utils
 
 """How to display information:
     Portfolio based:
-    Fractional Stocks?
-    Buy and Sell functions
+    Fractional Stocks? <- No for now
+    Buy and Sell functions <- Completed
    Code:
-    Portfolio Object
-    Portfolio manager
+    Portfolio Object <- Completed
+    Portfolio manager <- Probably don't need TBD
     Window display
     Grapher
 """
 
 
 def display_menu():
-    """Diqsplay menu for the program"""
+    """Display menu for the program"""
     choices = ("1. Add stock", "2. Remove stock", "3. Get open price", "4. Get close price")
     for item in choices:
         print(item)

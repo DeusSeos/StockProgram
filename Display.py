@@ -1,22 +1,26 @@
 from tkinter import *
-from Stock import Stock
-from screeninfo import get_monitors
+from Utils import *
+from Portfolio import *
 
 
 class Display(Frame):
 
     def __init__(self, stocklist, master=None):
+        self.master = master
         Frame.__init__(self, master)
         self.stocklist = stocklist
         self.size = len(stocklist)
-        self.master = master
         self.init_window()
         self.create_menu()
 
     def init_window(self):
         self.master.title('Stock Program')
         self.pack(fill=BOTH, expand=1)
-        self.master.iconphoto(True, PhotoImage(file="StockIconTest2.png"))
+        #self.master.iconphoto(True, PhotoImage(file="StockIconTest2.png"))
+        try:
+            self.master.geometry(getResolution())
+        except AttributeError as ex:
+            print(ex)
 
     def create_menu(self):
         """
@@ -33,9 +37,10 @@ class Display(Frame):
         portfolio.add_command(label="Buy")
 
         sell = Menu(portfolio, tearoff=0)
-        for n in range(len(self.stocklist)):
-            sell.add_command(label="A")
+        for stockName in self.stocklist:
+            sell.add_command(label=stockName)
         sell.add_separator()
+
         portfolio.add_cascade(label="Sell", menu=sell)
         portfolio.add_separator()
         portfolio.add_command(label='Load')
@@ -48,16 +53,7 @@ class Display(Frame):
 
 if __name__ == '__main__':
     root = Tk()
-    width = 100000
-    height = 100000
-    for m in get_monitors():
-        if width > int(m.width):
-            width = int(m.width)
-        if height > int(m.height):
-            height = int(m.height)
-    resolution = str(width) + "x" + str(height)
-    root.geometry(resolution)
-    a = [Stock("Advanced Mirco Devices", 'AMD')]
+    a = Portfolio().get_stocks()
     app = Display(stocklist=a, master=root)
     root.mainloop()
 
